@@ -6,6 +6,6 @@ data class Aluno(val nome: String, val sobrenome: String, val codigo: Int) {
             return other.codigo == this.codigo
         }
 
-        return false
+        return super.equals(other)
     }
 }
