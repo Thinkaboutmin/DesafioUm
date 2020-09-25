@@ -50,6 +50,7 @@ class DigitalHouseManager {
         val curso = cursos.find {it.codigo == codigoCurso}
         if (aluno != null && curso != null) {
             curso.adicionarUmAluno(aluno)
+            matriculas.add(Matricula(aluno, curso))
         }
     }
 
