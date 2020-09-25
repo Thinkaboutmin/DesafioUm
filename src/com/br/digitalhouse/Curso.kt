@@ -2,7 +2,7 @@ package com.br.digitalhouse
 
 class Curso(val nome: String, val codigo: Int, qntMaxAlunos: Int) {
     var professorAdjunto: ProfessorAdjunto? = null
-    var professorPrincipal: ProfessorPrincipal? = null
+    var professorTitular: ProfessorTitular? = null
     val alunos = mutableListOf<Aluno>()
 
     override fun equals(other: Any?): Boolean {
