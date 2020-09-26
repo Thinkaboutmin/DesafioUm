@@ -1,10 +1,16 @@
 package com.br.digitalhouse
 
+/*
+ * Classe de representação de um curso para o sistema.
+ */
 class Curso(val nome: String, val codigo: Int, val qntMaxAlunos: Int) : Model{
     var professorAdjunto: ProfessorAdjunto? = null
     var professorTitular: ProfessorTitular? = null
     private val alunos = mutableListOf<Aluno>()
 
+    /*
+     * Compara o curso pelo código e não pelas outras propriedades.
+     */
     override fun equals(other: Any?): Boolean {
         if (other != null && other is Curso) {
             return other.codigo == this.codigo
@@ -13,12 +19,17 @@ class Curso(val nome: String, val codigo: Int, val qntMaxAlunos: Int) : Model{
         return super.equals(other)
     }
 
+    /*
+     * Adiciona um aluno ao curso.
+     *
+     * Não há validação do aluno aqui pois é esperado ele tenha sido realizado antes.
+     */
     fun adicionarUmAluno(umAluno: Aluno): Boolean {
-        val aluno = this.alunos.find {it == umAluno}
         if (this.alunos.size == this.qntMaxAlunos) {
             return false
         }
 
+        val aluno = this.alunos.find {it == umAluno}
         if (aluno == null) {
             this.alunos.add(umAluno)
             return true
@@ -27,10 +38,18 @@ class Curso(val nome: String, val codigo: Int, val qntMaxAlunos: Int) : Model{
         return false
     }
 
+    /*
+     * Exclui um aluno do curso.
+     */
     fun excluirAluno(umAluno: Aluno) {
         alunos.remove(umAluno)
     }
 
+    /*
+     * Valida se o nome do curso e quantidade estão corretas. Além de também verificar se o professores estão válidos.
+     *
+     * Não há validação dos alunos do curso.
+     */
     override fun validar(): Array<String> {
         val erros = mutableListOf<String>()
         if (this.qntMaxAlunos < 0) {
