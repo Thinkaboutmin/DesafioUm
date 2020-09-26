@@ -14,9 +14,13 @@ class Curso(val nome: String, val codigo: Int, val qntMaxAlunos: Int) : Model{
     }
 
     fun adicionarUmAluno(umAluno: Aluno): Boolean {
-        val aluno = alunos.find {it == umAluno}
+        val aluno = this.alunos.find {it == umAluno}
+        if (this.alunos.size == this.qntMaxAlunos) {
+            return false
+        }
+
         if (aluno == null) {
-            alunos.add(umAluno)
+            this.alunos.add(umAluno)
             return true
         }
 
@@ -45,7 +49,7 @@ class Curso(val nome: String, val codigo: Int, val qntMaxAlunos: Int) : Model{
         }
 
         // FIXME: A validação de Collections é extremamente confusa e não da opções faceis para que sejam tratadas.
-        // FIXME: A principal razão é o design mas evitem colocar alunos aqui sem validar eles antes... Ok?
+        // FIXME: A principal razão é o design da interface mas evitem colocar alunos aqui sem validar eles antes... Ok?
         return erros.toTypedArray()
     }
 }
