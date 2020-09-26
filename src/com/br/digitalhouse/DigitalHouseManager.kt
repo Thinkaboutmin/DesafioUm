@@ -50,7 +50,7 @@ class DigitalHouseManager {
     fun registrarProfessorTitular(nome: String, sobrenome: String, codigo: Int, especialidade: String): Boolean {
         val professorTitular = ProfessorTitular(nome, sobrenome, codigo, especialidade)
         val professor = professores.find {it is ProfessorTitular && it == professorTitular}
-        if (professor != null) {
+        if (professor == null) {
             val erros = professorTitular.validar()
             if (erros.isEmpty()) {
                 professores.add(professorTitular)
